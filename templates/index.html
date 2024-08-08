@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="task-table">
+        {% if tasks|length < 1 %}
+        <h1>No tasks created</h1>
+        {% else %}
+        <h2>List of Tasks</h2>
+
+        <table>
+            <tr>
+                <th>Task</th>
+                <th>Added</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for item in tasks %}
+            <tr>
+                <td>{{item.content}}</td>
+                <td>{{item.date_created.date()}}</td>
+                <td>
+                    <a href="/delete/{{item.id}}">Delete</a><br>
+                    <a href="/update/{{item.id}}">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        {% endif %}
+        <form action="/" method="POST">
+            <p>Enter new task</p>
+            <input type="text" name="content" id="content">
+            <br>
+            <input type="submit" value="Add">
+        </form>
+    </div>
+{% endblock %}
